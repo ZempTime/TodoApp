@@ -4,6 +4,7 @@ import Heading from './Heading';
 import Input from './Input';
 import Button from './Button';
 import TodoList from './TodoList';
+import TabBar from './TabBar'
 
 let todoIndex = 0
 
@@ -54,16 +55,20 @@ class App extends Component {
     })
     this.setState({ todos })
   }
+  setType (type) {
+    this.setState({ type })
+  }
   render() {
-    const { inputValue, todos } = this.state
+    const { inputValue, todos, type } = this.state
     return (
       <View style={styles.container}>
         <ScrollView style={styles.content}>
           <Heading />
           <Input inputValue={inputValue} inputChange={(text) => this.inputChange(text)} />
-          <TodoList toggleComplete={this.toggleComplete} deleteTodo={this.deleteTodo} todos={todos} />
+          <TodoList toggleComplete={this.toggleComplete} deleteTodo={this.deleteTodo} todos={todos} type={type} />
           <Button submitTodo={this.submitTodo} />
         </ScrollView>
+        <TabBar type={type} setType={this.setType.bind(this)} />
       </View>
     )
   }
